@@ -3,7 +3,7 @@
 $WingetPackages = @(
     'Git.Git',
     'Microsoft.WindowsTerminal',
-    'Microsoft.PowerShell'
+    'Microsoft.PowerShell',
     'Microsoft.VisualStudioCode',
     'JanDeDobbeleer.OhMyPosh',
     'GoLang.Go',
@@ -23,16 +23,16 @@ $WingetPackages = @(
 
 $Count = 0
 
-for ($item -in $WingetPackages) {
-    Write-Output "Installing $item..."
+foreach ($Item in $WingetPackages) {
     try {
-        winget install $item -s winget
+        winget install $Item -s winget
+        Write-Output "Installed: $Item"
         $Count++
     }
     catch {
-        Write-Error "Failed to install $item"
-        $Unsuccessful += $item
+        Write-Error "Failed to install: $Item"
+        $Unsuccessful += $Item
     }
 }
 
-Write-Output "Installed $Count packages"
+Write-Output "Installed $Count packages out of $($WingetPackages.Count)"
